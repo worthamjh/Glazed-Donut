@@ -1,4 +1,3 @@
-const { createElement } = require("react");
 
 const newButton =document.querySelector('.btnV2');
 
@@ -170,13 +169,45 @@ formSubmit.addEventListener('submit', function (evt) {
 
 
 
-const formSubmit2 = document.querySelector('#formSubmitButton2');
+const formSubmit2 = document.querySelector('#shelterForm');
 const catName = document.querySelector('#checkBoxInput2');
+const catNameList = document.querySelector('#adoptableCats');
 formSubmit2.addEventListener('submit', function(evt){
     evt.preventDefault();
-    console.log(input.value);
-    // for (let name of catName){
-    //     const catList = document.querySelector('#adoptableCats');
-    //     co
-    // }
-})
+    const catNameInput = catName.value;
+    const catNameListItem = document.createElement('LI');
+    catNameListItem.innerText = catNameInput;
+    catNameList.append(catNameListItem);
+    catName.value = '';
+});
+
+
+
+const formSelect = document.querySelector('#groceryForm');
+const productSelect = document.querySelector('#product');
+const quantitySelect = document.querySelector('#qty');
+const listSelect = document.querySelector('#list');
+formSelect.addEventListener('submit', function(evt){
+    evt.preventDefault();
+    const productItem = productSelect.value;
+    const quantityItem = quantitySelect.value;
+    const productListItem = document.createElement('LI'); 
+    productListItem.innerText = quantityItem +  productItem;
+    listSelect.append(productListItem);
+    productSelect.value = '';
+    quantitySelect.value = '';
+});
+
+
+
+
+// const changeEventInputSelector = document.querySelector('#changeEventInput');
+// changeEventInputSelector.addEventListener('change', function(evt){
+//     console.log('sdfsdfsdf');
+// });
+
+const changeEventInputSelector = document.querySelector('#changeEventInput');
+const specialSpanSelector = document.querySelector('#specialSpan');
+changeEventInputSelector.addEventListener('input', function(evt){
+    specialSpanSelector.innerText=changeEventInputSelector.value;
+});
