@@ -211,3 +211,19 @@ const specialSpanSelector = document.querySelector('#specialSpan');
 changeEventInputSelector.addEventListener('input', function(evt){
     specialSpanSelector.innerText=changeEventInputSelector.value;
 });
+
+
+
+const userNameSelector = document.querySelector('#username');
+const h1Selector = document.querySelector('#headerPractice');
+userNameSelector.addEventListener('input', function(evt){
+    const userNameInput = userNameSelector.value;
+    const h1Input = userNameInput.length;
+    if (userNameInput.length > 0){
+         h1Selector.innerText = `Welcome, ${userNameInput}`
+        }
+        else {
+        h1Selector.innerHTML = 'Enter Your Username'
+        } 
+    }
+)
