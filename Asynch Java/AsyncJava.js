@@ -97,30 +97,81 @@ const fakeRequestPromise = (url) => {
 // })
 // ********************************************************************
 // ASYNC NESTED CALLBACKS
-fakeRequestCallBack('books.com/page1', 
-    function(response){
-        console.log('It Worked!')
-        console.log(response)
-        fakeRequestCallBack('books.com/page2',
-            function(response){
-                console.log('It Worked Again!')
-                console.log(response)
-                fakeRequestCallBack('books.com/page3',
-                    function(response){
-                        console.log('It Worked Thrice!')
-                        console.log(response)
-                    },
-                     function(err){
-                        console.log('Error Page 3!!!!')
-                        console.log(err)
-                    })
-            },
-            function(err){
-                console.log('Error Page 2!!!!')
-                console.log(err)
-            })
-    }, function(err){
-        console.log('Error!!!!')
-        console.log(err)
-})
+// fakeRequestCallBack('books.com/page1', 
+//     function(response){
+//         console.log('It Worked!')
+//         console.log(response)
+//         fakeRequestCallBack('books.com/page2',
+//             function(response){
+//                 console.log('It Worked Again!')
+//                 console.log(response)
+//                 fakeRequestCallBack('books.com/page3',
+//                     function(response){
+//                         console.log('It Worked Thrice!')
+//                         console.log(response)
+//                     },
+//                      function(err){
+//                         console.log('Error Page 3!!!!')
+//                         console.log(err)
+//                     })
+//             },
+//             function(err){
+//                 console.log('Error Page 2!!!!')
+//                 console.log(err)
+//             })
+//     }, function(err){
+//         console.log('Error!!!!')
+//         console.log(err)
+// })
 
+// ***********************************************************************************
+// Async Promise
+// FULL LENGTH PROMISE
+// const request = fakeRequestPromise('yelp.com/api/page1');
+// request.then(() => {
+//     console.log('Page 1 success')
+//     fakeRequestPromise('yelp.com/api/page2')
+//         .then(() => {
+//             console.log('Page 2 success')
+//             fakeRequestPromise('yelp.com/api/page')
+//                 .then(() => {
+//                     console.log('Page 3 success')
+//                 })
+//                 .catch(() => {
+//                     console.log('Error page 3');
+//                 })
+//         })
+//         .catch(() => {
+//         console.log('Error page 2');
+//         })
+// })
+// .catch(() => {
+//     console.log('Error page 1')
+// })
+
+// SHORTENED PROMISE DOES THE SAME THING AS ABOVE JUST SHORTER
+
+fakeRequestPromise('yelp.com/api/page1')
+    .then((data) => {
+        console.log('Page 1 success')
+        console.log(data)
+        return fakeRequestPromise('yelp.com/api/page2')
+    })
+    .then((data) => {
+        console.log('Page 2 success')
+        console.log(data)
+        return fakeRequestPromise('yelp.com/api/page3')
+    })
+    .then((data) => {
+        console.log('Page 3 success')
+        console.log(data)
+        return fakeRequestPromise('yelp.com/api/page4')
+    })
+    .then((data) => {
+        console.log('Page 4 success')
+        console.log(data)
+        return fakeRequestPromise('yelp.com/api/page5')
+    })
+    .catch((data) => {
+        console.log('Oh no error')
+    })
