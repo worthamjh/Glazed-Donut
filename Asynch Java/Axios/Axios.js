@@ -19,11 +19,31 @@
 const spongeBobEpisodes = async (id) => {
     try{
     const res =await axios.get(`https://api.tvmaze.com/episodes/${id}`);
-    console.log(res.data);
+    console.log(res.data.name);
     } catch (error) {
         console.log('Error', error);
     }
 };
 
 // spongeBobEpisodes(62896-3416349) episode id number range for spongebob
+
+const getDadJokeButtonSelector = document.querySelector('#dadJokeButton');
+const jokesSelector = document.querySelector('#jokes');
+
+const getDadJoke = async () => {
+    try{
+    const config = {headers: { Accept: 'application/json'}}
+    const res = await axios.get('https://icanhazdadjoke.com/', config);
+    return res.data.joke;
+    } catch (e){
+        return 'Oh no error';
+    }
+}
+const addNewJoke = async () => {
+    const newJokeText = await getDadJoke();
+    const newLI = document.createElement('LI');
+    newLI.append(newJokeText);
+    jokesSelector.append(newLI);
+}
+getDadJokeButtonSelector.addEventListener('click', addNewJoke);
 
