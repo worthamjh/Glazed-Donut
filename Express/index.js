@@ -10,6 +10,18 @@ const port = 3000
 app.get('/', (req, res) => {
     res.send('This is the Rootpage or Homepage if you like')
 })
+app.get('/r/:subreddit', (req, res) => {
+    const {subreddit} = req.params;
+    res.send(`<h1>Browsing the ${subreddit} subreddit</h1>`)
+})
+app.get('/r/:subreddit/:postId', (req, res) => {
+    const {subreddit, postId} = req.params;
+    res.send(`<h1>Browsing post Id: ${postId} on the ${subreddit} subreddit</h1>`)
+})
+app.get('/:search', (req, res) => {
+    const {q} = req.query;
+    res.send(`Search results for ${q}`)
+})
 app.get('/cats', (req, res) => {
     res.send('MEOW')
 })
