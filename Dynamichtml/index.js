@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const unitData = require('./data.json');
-console.log(data);
+
+app.use(express.static(path.join(__dirname, '/public')))
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -21,7 +22,7 @@ app.get ('/rand', (req,res) => {
 })
 
 
-app.get('/unit1Assignments', (req, res) => {
+app.get('/:unit1Assignments', (req, res) => {
     const {unit1Assignments} = req.params;
     const data = unitData[unit1Assignments];
     res.render('unit1Assignments', {...data});
