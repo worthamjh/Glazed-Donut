@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const unitData = require('./data.json');
+const redditData = require('./data.json');
+
 
 app.use(express.static(path.join(__dirname, '/public')))
 
@@ -14,19 +15,16 @@ app.get('/', (req, res) => {
 
 app.get ('/r/:subreddit', (req,res) => {
     const {subreddit} = req.params;
-    res.render('subreddit.ejs', {subreddit})
+    const data = redditData[subreddit];
+    res.render('subreddit', { subreddit: data });
 })
+
 app.get ('/rand', (req,res) => {
     const num = Math.floor(Math.random()*10) + 1;
     res.render('random.ejs', {rand: num})
 })
 
 
-app.get('/:unit1Assignments', (req, res) => {
-    const {unit1Assignments} = req.params;
-    const data = unitData[unit1Assignments];
-    res.render('unit1Assignments', {...data});
-});
 // app.get ('/:unit1Assignments', (req,res) => {
 //     const {unit1Assignments} = req.params;
 //     const data = unitData[unit1Assignments];
