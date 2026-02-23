@@ -13,6 +13,19 @@
 <body>
     <h1>Browising the <%= subreddit.name %> subreddit</h1>
     <h2>Browising the <%= subreddit.description %> subreddit</h2>
+    <h3>Browising the <%= subreddit.subscribers %> subreddit</h3>
+    <hr>
+
+    <% for (let post of subreddit.posts) { %>
+        <article>
+            <p>
+                <%= post.title%> - <%= post.author%>
+            </p>
+            <% if(post.img){ %>
+                <img src="<%= post.img %>" alt="">
+                <% } %>
+        </article>
+        <% } %>
 </body>
 
 </html>

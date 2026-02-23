@@ -16,7 +16,11 @@ app.get('/', (req, res) => {
 app.get ('/r/:subreddit', (req,res) => {
     const {subreddit} = req.params;
     const data = redditData[subreddit];
+    if (data) {
     res.render('subreddit', { subreddit: data });
+    } else {
+        res.render('notFound', {subreddit})
+    }
 })
 
 app.get ('/rand', (req,res) => {
